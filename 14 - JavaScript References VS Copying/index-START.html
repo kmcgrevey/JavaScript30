@@ -8,13 +8,27 @@
 
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
+
+    let name = 'Kev';
+    let name2 = name;
+    console.log(name, name2);
+    name = 'Kevin';
+    console.log(name, name2);
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    const team = players;
+    console.log(players, team);
 
     // You might think we can just do something like this:
+    // team[3] = 'Dude'; // MAKES REFERNCE TO ORIGINAL ARRAY -- CHANGED TOO!
 
     // however what happens when we update that array?
 
@@ -27,10 +41,20 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    const team2 = players.slice(); // MAKES COPY INTO NEW ARRAY
+    team2[3] = 'Team2'
+
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(players);
+    team3[3] = 'Team3'
 
     // or use the new ES6 Spread
+    const team4 = [...players]; // SPREAD
+    team4[3] = 'Team4'
+
+    const team5 = Array.from(players);
+    team5[3] = 'Team5';
 
     // now when we update it, the original one isn't changed
 
@@ -43,12 +67,37 @@
     };
 
     // and think we make a copy:
+    const capt = person;
+    capt.number = 99;
 
     // how do we take a copy instead?
+    const capt2 = Object.assign({}, person, { number: 44, age: 21 }); // blank object, object to copy, new props
+    console.log(capt2);
 
     // We will hopefully soon see the object ...spread
-
+    const capt3 = {...person};
+    capt3.number = 55;
+    console.log(capt3);
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const kev = {
+      name: 'Kev',
+      age: 51,
+      social: {
+        twitter: '@notweet',
+        facebook: 'kev.dev'
+      }
+    };
+    // console.clear();// CLEARS ALL OUTPUT ABOVE THIS LINE
+    console.log(kev);
+
+    const dev = Object.assign({}, kev);// WILL OVERWRITE TWITTER AND FACEBOOK LEVELS OF ORIGINAL
+    dev.name = 'Kevin';
+    console.log(dev);
+
+    const dev2 = JSON.parse(JSON.stringify(kev));
+    dev2.social.twitter = '@birdbomb';
+    dev2.name = 'Devin2';
+    console.log(dev2);
 
   </script>
 
